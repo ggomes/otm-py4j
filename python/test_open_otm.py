@@ -13,11 +13,13 @@ if conn.pid is not None:
     sim_dt = 2.0
 
     this_folder = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-    scenario_name = 'scenario'  # Scenario name
-    configfile = os.path.join(this_folder, os.path.pardir, 'configfiles', scenario_name+'.xml')
+    root_folder = os.path.dirname(this_folder)
+    configfile = os.path.join(root_folder, 'config', 'line.xml')
 
-    self.beats_api = conn.gateway.entry_point.get_BeATS_API()
-    timestamps = self.beats_api.load(configfile, sim_dt, True, "ctm")
+    otm_api = conn.gateway.entry_point.get_OTM_API()
+    otm_api.load(configfile, sim_dt, True, "ctm")
+
+    print(otm_api.get_num_links())
 
     # kill jvm
     conn.close()

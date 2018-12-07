@@ -17,15 +17,16 @@ class Java_Connection():
         self.pid = None
 
         #Port Number
-        port_num = 25335 + rank
+        port_num = 25335
 
         self.port_number = str(port_num)
 
         this_folder = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-        jar_file_name = os.path.join(this_folder, 'py4jbeats-1.0-SNAPSHOT-jar-with-dependencies.jar')
+        root_folder = os.path.dirname(this_folder)
+        jar_file_name = os.path.join(root_folder,'target', 'otm-py4j-1.0-SNAPSHOT-jar-with-dependencies.jar')
 
         #First check if the file exists indeed:
-        if os.path.isfile('py4jbeats-1.0-SNAPSHOT-jar-with-dependencies.jar'):
+        if os.path.isfile(jar_file_name):
 
             if platform.system() == "Windows":
                 self.openWindows(jar_file_name, self.port_number)
@@ -36,10 +37,8 @@ class Java_Connection():
 
             self.gateway = JavaGateway(gateway_parameters=GatewayParameters(port=int(self.port_number)))
 
-            print(platform.system())
-
         else:
-            print "Jar file missing"
+            print("Jar file missing")
 
     def openWindows(self, jar_file_name, port_number):
         try:
