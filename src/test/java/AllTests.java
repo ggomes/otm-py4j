@@ -10,7 +10,7 @@ public class AllTests {
             Entry_Point_OTM entry_point = new Entry_Point_OTM();
             API api = entry_point.get_OTM_API();
             String configfile ="C:\\Users\\gomes\\code\\otm\\otm-base\\src\\main\\resources\\test_configs\\line.xml";
-            api.load(configfile,2f,true,"ctm");
+            api.load(configfile);
         } catch (OTMException e) {
             e.printStackTrace();
         }
