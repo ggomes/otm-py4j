@@ -9,3 +9,4 @@
 *.class
 *.lst
 target/
+*.jar

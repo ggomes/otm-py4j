@@ -11,9 +11,40 @@
     <name>otm-py4j</name>
     <url>http://maven.apache.org</url>
 
+    <scm>
+        <connection>scm:git:git@github.com:ggomes/otm-py4j.git</connection>
+        <developerConnection>scm:git:git@github.com:ggomes/otm-py4j.git</developerConnection>
+        <url>git@github.com:ggomes/otm-py4j.git</url>
+    </scm>
+    
     <build>
 
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
+
+            <!-- version number -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <revisionOnScmFailure>true</revisionOnScmFailure>
+                </configuration>
+            </plugin>
 
             <!-- MAVEN COMPILER  -->
             <plugin>
@@ -39,10 +70,9 @@
                         <manifest>
                             <mainClass>Entry_Point_OTM</mainClass>
                         </manifest>
-                        <!--
                         <manifestEntries>
                             <git-SHA-1>${buildNumber}</git-SHA-1>
-                        </manifestEntries> -->
+                        </manifestEntries> 
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -77,7 +107,6 @@
             <artifactId>py4j</artifactId>
             <version>0.10.6</version>
         </dependency>
-
 
         <dependency>
             <groupId>junit</groupId>
